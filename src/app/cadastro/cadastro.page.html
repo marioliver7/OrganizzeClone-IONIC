@@ -1,0 +1,149 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true" padding class="container">
+  <div id="centralizar">
+
+    <div class="profile">
+      <img src="../../assets/img/user.png" alt="">
+      <ion-row>
+
+        <ion-col>
+          <ion-icon size="large" name="camera-outline"></ion-icon>
+        </ion-col>
+
+        <ion-col>
+          <ion-icon size="large" name="image-outline"></ion-icon>
+        </ion-col>
+
+      </ion-row>
+    </div>
+
+    <div class="secao">
+      <!-- <h4>Dados de Acesso</h4> -->
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input maxlength="50" type="email"></ion-input>
+        <span *ngIf="erroEmail">*Email inválido</span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Repita o email</ion-label>
+        <ion-input maxlength="50" type="email"></ion-input>
+        <span *ngIf="erroEmailConf">*Email inválido</span>
+      </ion-item>
+        
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input maxlength="15" type="password"></ion-input>
+        <span *ngIf="erroSenha">*Senha inválida</span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Repita a senha</ion-label>
+        <ion-input maxlength="15" type="password"></ion-input>
+        <span *ngIf="erroSenhaConf">*Senha inválida</span>
+      </ion-item>
+    </div>
+
+    <div class="secao">
+      <h4>Dados pessoais</h4>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input maxlength="15" type="text"></ion-input>
+            <span *ngIf="erroNome">*Nome Inválido</span>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Sobrenome</ion-label>
+            <ion-input maxlength="40" type="text"></ion-input>
+            <span *ngIf="erroSobrenome">*Sobrenome Inválido</span>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input maxlength="15" type="text"></ion-input>
+        <span *ngIf="erroTelefone">*Telefone Inválido</span>
+      </ion-item>
+      
+      <ion-item lines="none">
+        <ion-label position="floating">Gênero</ion-label>
+        <ion-select value="F">
+          <ion-select-option value="F">Feminino</ion-select-option>
+          <ion-select-option value="M">Masculino</ion-select-option>
+          <ion-select-option value="O">Outros</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item lines="none">
+        <ion-label position="floating">Data de nascimento: </ion-label>
+      <ion-datetime value="2000-01-01" min="2000-02" max="2030" 
+        [dayShortNames]="customDayShortNames"
+        monthShortNames="Jan, Fev, Mar, Apr, Mai, Jun, Jul, Aug, Set, Out, Nov, Dez" 
+        displayFormat="DD MMM, YY"></ion-datetime>
+      </ion-item>
+    </div>
+      
+      <div class="secao">
+        <h4>Endereço</h4>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Cep</ion-label>
+              <ion-input maxlength="8" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Número</ion-label>
+              <ion-input maxlength="5" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-item>
+          <ion-label position="floating">Endereço</ion-label>
+          <ion-input maxlength="50" type="text"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="floating">Complemento</ion-label>
+          <ion-input maxlength="20" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Bairro</ion-label>
+          <ion-input maxlength="30" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Cidade</ion-label>
+          <ion-input maxlength="30" type="text"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="secao buttons">
+        <ion-row>
+          <ion-col>
+            <ion-button shape="round" color="success" fill="outline">Salvar</ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button shape="round" color="danger" fill="outline" (click)="sairTela()">Cancelar</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+  </div>
+</ion-content>

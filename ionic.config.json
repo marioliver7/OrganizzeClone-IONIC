@@ -1,0 +1,7 @@
+{
+  "name": "Organizze",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

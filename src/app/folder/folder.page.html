@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true" class="ion-padding container" scroll-y="false">
+  <ion-slides>
+
+    <ion-slide>
+      <div class="slide">
+        <img src="../../assets/img/um.png">
+        <h2>Tudo na vida é uma questão de equilíbrio!</h2>
+        <p>Acredite, quando o assunto é finanças não é diferente.</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="../../assets/img/dois.png">
+        <h2>Criar prioridades ajuda a ter clareza</h2>
+        <p>Não depende de quanto ganhamos, mas de como gastamos o nosso rico dinheirinho.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="../../assets/img/tres.png">
+        <h2>Disso a gente entende!</h2>
+        <p>Conte com a nossa inteligência financeira e aproveite a facilidade de controlar todas as suas contas num só lugar!</p>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
+
+  <ion-footer>
+
+      <ion-row>
+        <ion-col>
+          <ion-button color="light" class="login" expand="block" (click)="carregarTela('login')">Login</ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button color="success" class="cadastro" expand="block" (click)="carregarTela('cadastro')">Começar agora</ion-button>
+        </ion-col>
+      </ion-row>
+
+  </ion-footer>
