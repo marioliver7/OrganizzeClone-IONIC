@@ -18,11 +18,11 @@
 
     <ion-row>
       <ion-col>
-        <ion-button color="success" class="login" expand="block" fill="outline">Salvar</ion-button>
+        <ion-button color="success" class="login" expand="block" fill="outline" (click)="geralCtrl.carregarTela('cadastro')">Salvar</ion-button>
       </ion-col>
 
       <ion-col>
-        <ion-button color="danger" class="cadastro" expand="block" fill="outline" (click)="carregarTela('folder/inbox')">Cancelar</ion-button>
+        <ion-button color="danger" class="cadastro" expand="block" fill="outline" (click)="geralCtrl.alertInicial()">Cancelar</ion-button>
       </ion-col>
     </ion-row>
   </div>

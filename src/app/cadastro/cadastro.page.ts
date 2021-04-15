@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { GeralService } from '../service/geral.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -8,50 +9,26 @@ import { AlertController, NavController } from '@ionic/angular';
 })
 export class CadastroPage implements OnInit {
 
+  public cep; endereco; numero; complemento; bairro; cidade: string;
+
   public erroEmail; erroEmailConfig; erroSenha; erroSenhaConfig; erroNome; erroSobrenome; erroTelefone: boolean = false;
 
-  constructor(public alertController: AlertController, public navCtrl: NavController) { }
+  constructor(public geralCtrl: GeralService) { }
 
   ngOnInit() {
   }
 
-  teste() {
-    alert("Bom dia");
-  }
-
-  async alertaSimples() {
-    const alert = await this.alertController.create({
-      header: 'Organizze',
-      subHeader: 'SubTítulo',
-      message: 'Boa noite!',
-      buttons: ['Ok']
-    });
-    await alert.present();
-  }
-
-  async sairTela() {
-    const alert = await this.alertController.create({
-      header: 'Organizze',
-      message: 'Deseja realmente sair dessa tela?',
-      buttons: [
-        {
-          text: 'Sim',
-          cssClass: 'secondary',
-          handler: () => {
-            this.navCtrl.navigateForward("folder/inbox")
-          }
-        }, 
-        {
-          text: 'Não',
-          role: 'não',
-          handler: () => {
-            
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+  exibirCep(cep) {
+    this.geralCtrl.carregarCep(cep)
+    .then ((response:any) => {
+      // this.complemento = response.complemento;
+      this.endereco = response.logradouro;
+      this.bairro = response.bairro;
+      this.cidade = response.localidade;
+    })
+    .catch ((response:any) => {
+      alert("CEP incorreto")
+    })
   }
 
 }
