@@ -23,11 +23,11 @@
     </div>
 
     <div class="secao">
-      <!-- <h4>Dados de Acesso</h4> -->
+      <h4>Dados de Acesso</h4>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input maxlength="50" type="email"></ion-input>
-        <span *ngIf="erroEmail">*Email inválido</span>
+        <ion-input maxlength="50" type="email" (ionBlur)="validacaoCtrl.validarEmail(email)" [(ngModel)]="email"></ion-input>
+        <span *ngIf="validacaoCtrl.erroEmail">*Email inválido</span>
       </ion-item>
 
       <ion-item>
@@ -38,8 +38,8 @@
         
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
-        <ion-input maxlength="15" type="password"></ion-input>
-        <span *ngIf="erroSenha">*Senha inválida</span>
+        <ion-input maxlength="15" type="password" (ionBlur)="validacaoCtrl.validarPassword(password)" [(ngModel)]="password"></ion-input>
+        <span *ngIf="validacaoCtrl.erroSenha">*Senha inválida</span>
       </ion-item>
 
       <ion-item>
