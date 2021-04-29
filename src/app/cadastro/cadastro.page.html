@@ -8,17 +8,18 @@
   <div id="centralizar">
 
     <div class="profile">
-      <img src="../../assets/img/user.png" alt="">
-      <ion-row>
+      <div class="divFoto">
+        <img [src]="cameractrl.photoPadrao">
+      </div>
 
+      <ion-row>
         <ion-col>
-          <ion-icon size="large" name="camera-outline"></ion-icon>
+          <ion-icon size="large" name="camera-outline" (click)="cameractrl.takePicture()"></ion-icon>
         </ion-col>
 
         <ion-col>
           <ion-icon size="large" name="image-outline"></ion-icon>
         </ion-col>
-
       </ion-row>
     </div>
 
@@ -28,28 +29,23 @@
         <ion-label position="floating">Email</ion-label>
         <ion-input maxlength="50" type="email" (ionBlur)="validacaoCtrl.validarEmail(email)" [(ngModel)]="email"></ion-input>
         <span *ngIf="validacaoCtrl.erroEmail">*Campo obrigatório</span>
-        <span *ngIf="validacaoCtrl.erroCaracter">*Necessário acrescentar @</span>
-        <span *ngIf="validacaoCtrl.erroPonto">*Necessário acrescentar "."</span>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Repita o email</ion-label>
-        <ion-input maxlength="50" type="email" (ionBlur)="validacaoCtrl.validarRepetirEmail(repetirEmail, email)" [(ngModel)]="repetirEmail"></ion-input>
+        <ion-input maxlength="50" type="email" [(ngModel)]="emailConfir"></ion-input>
         <span *ngIf="validacaoCtrl.erroEmailConf">*Email inválido</span>
       </ion-item>
         
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
         <ion-input maxlength="15" type="password" (ionBlur)="validacaoCtrl.validarPassword(password)" [(ngModel)]="password"></ion-input>
-        <span *ngIf="validacaoCtrl.erroSenha">*Campo obrigatório</span>
-        <span *ngIf="validacaoCtrl.erroTamanho">*A senha deve ter mais de 8 caracteres</span>
-        <span *ngIf="validacaoCtrl.erroNumero">*A senha deve ter pelo menos um número</span>
-        <span *ngIf="validacaoCtrl.erroCaractereEspecial">*A senha deve ter pelo menos 1 caractere especial</span>
+        <span *ngIf="validacaoCtrl.erroSenha">{{validacaoCtrl.msgErroPassword}}</span>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Repita senha</ion-label>
-        <ion-input maxlength="15" type="password" (ionBlur)="validacaoCtrl.validarRepetirSenha(repetirSenha, password)" [(ngModel)]="repetirSenha"></ion-input>
+        <ion-input maxlength="15" type="password" [(ngModel)]="passwordConfir"></ion-input>
         <span *ngIf="validacaoCtrl.erroSenhaConf">*Senha inválida</span>
       </ion-item>
     </div>
@@ -62,9 +58,6 @@
             <ion-label position="floating">Nome</ion-label>
             <ion-input maxlength="15" type="text" (ionBlur)="validacaoCtrl.validarNome(nome)" [(ngModel)]="nome"></ion-input>
             <span *ngIf="validacaoCtrl.erroNome">*Nome Inválido</span>
-            <span *ngIf="validacaoCtrl.erroTamanhoNome">*Não pode ter menos que 3 caracteres</span>
-            <span *ngIf="validacaoCtrl.erroNumeroNome">*Não pode ter números</span>
-            <span *ngIf="validacaoCtrl.erroSemCaractereEspNome">*Não pode ter caractere especial</span>
           </ion-item>
         </ion-col>
         
@@ -73,26 +66,19 @@
             <ion-label position="floating">Sobrenome</ion-label>
             <ion-input maxlength="40" type="text" (ionBlur)="validacaoCtrl.validarSobrenome(sobrenome)" [(ngModel)]="sobrenome"></ion-input>
             <span *ngIf="validacaoCtrl.erroSobrenome">*Sobrenome Inválido</span>
-            <span *ngIf="validacaoCtrl.erroTamanhoSobrenome">*Não pode ter menos que 3 caracteres</span>
-            <span *ngIf="validacaoCtrl.erroNumeroSobrenome">*Não pode ter números</span>
-            <span *ngIf="validacaoCtrl.erroSemCaractereEspSobrenome">*Não pode ter caractere especial</span>
           </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-item>
         <ion-label position="floating">Telefone</ion-label>
-        <ion-input maxlength="15" type="text" (ionBlur)="validacaoCtrl.validarTelefone(telefone)" [(ngModel)]="telefone"></ion-input>
+        <ion-input maxlength="15" type="text" [(ngModel)]="telefone" (ionChange)="masktelefone(telefone)"></ion-input>
         <span *ngIf="validacaoCtrl.erroTelefone">*Telefone Inválido</span>
-        <span *ngIf="validacaoCtrl.erroTelefoneCaractere">*Não pode ter menos que 8 caracteres</span>
-        <span *ngIf="validacaoCtrl.erroTelefoneMaxCaractere">*Não pode ter mais que 8 caracteres</span>
-        <span *ngIf="validacaoCtrl.erroStringTelefone">*Somente números</span>
-        <span *ngIf="validacaoCtrl.erroCaractereEspTelefone">*Não pode ter caracter especial</span>
       </ion-item>
       
       <ion-item lines="none">
         <ion-label position="floating">Gênero</ion-label>
-        <ion-select value="F">
+        <ion-select value="F" [(ngModel)]="genero">
           <ion-select-option value="F">Feminino</ion-select-option>
           <ion-select-option value="M">Masculino</ion-select-option>
           <ion-select-option value="O">Outros</ion-select-option>
@@ -104,7 +90,7 @@
       <ion-datetime value="2000-01-01" min="2000-02" max="2030" 
         [dayShortNames]="customDayShortNames"
         monthShortNames="Jan, Fev, Mar, Apr, Mai, Jun, Jul, Aug, Set, Out, Nov, Dez" 
-        displayFormat="DD MMM, YY"></ion-datetime>
+        displayFormat="MM/DD/YYYY"  (ionBlur)= "formatarData()" [(ngModel)]="nasc"></ion-datetime>
       </ion-item>
     </div>
       
@@ -151,7 +137,7 @@
       <div class="secao buttons">
         <ion-row>
           <ion-col>
-            <ion-button shape="round" color="success" fill="outline">Salvar</ion-button>
+            <ion-button shape="round" color="success" fill="outline" (click)="salvar()">Salvar</ion-button>
           </ion-col>
 
           <ion-col>

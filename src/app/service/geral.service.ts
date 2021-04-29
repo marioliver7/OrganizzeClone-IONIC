@@ -38,6 +38,16 @@ export class GeralService {
     this.navCtrl.navigateForward(page);
   }
 
+  async alertComum(mensagem) {
+    let alertacomum = await this.alertController.create({
+      header: 'Organizze',
+      message: mensagem,
+
+      buttons: ['OK']
+    });
+
+    await alertacomum.present();
+  }
 
   carregarCep(cep) {
     let url = 'http://viacep.com.br/ws/' + cep + '/json/';
