@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { BancoService } from '../service/banco.service';
 import { CameraService } from '../service/camera.service';
 import { GeralService } from '../service/geral.service';
 import { ValidacaoService } from '../service/validacao.service';
@@ -21,7 +22,7 @@ export class CadastroPage implements OnInit {
 
   public erroEmail; erroEmailConf; erroSenha; erroSenhaConf; erroNome; erroSobrenome; erroTelefone: boolean = false;
 
-  constructor(public geralCtrl: GeralService, public validacaoCtrl: ValidacaoService, public cameractrl: CameraService) { }
+  constructor(public bancoCtrl: BancoService, public geralCtrl: GeralService, public validacaoCtrl: ValidacaoService, public cameractrl: CameraService) { }
 
   ngOnInit() {
   }
@@ -82,6 +83,7 @@ export class CadastroPage implements OnInit {
     } 
 
     this.geralCtrl.alertComum("Dados corretos");
+    
     this.usuario = 
     { 
       email: this.email, 
@@ -102,7 +104,8 @@ export class CadastroPage implements OnInit {
 
       foto: this.cameractrl.photo
     };
-    console.log(this.usuario);
+
+    this.inserirUser();
   }
 
   // maskCPF(valor: string) {
@@ -112,5 +115,27 @@ export class CadastroPage implements OnInit {
   //   valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
   //   this.cpf = valor
   // }
+
+  inserirUser() {
+    this.bancoCtrl.adicionarUsuario(this.usuario)
+    .then((resposta: any) => { // caso de certo
+      switch(resposta.Resp) {
+        case '1':
+          this.geralCtrl.alertComum("Email já cadastrado")
+          break
+        case '0':
+          this.geralCtrl.alertComum("Usuário cadastrado com sucesso!")
+          this.geralCtrl.carregarTela('login');
+          break
+      }
+    })
+    .catch((resposta) => {
+      this.geralCtrl.alertComum("Servidor não encontrado")
+    })
+  }
+
+  updateUser() {
+
+  }
 
 }
