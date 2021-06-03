@@ -4,12 +4,12 @@
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="email" [(ngModel)]="email" maxlength="50"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="password" [(ngModel)]="senha" maxlength="15"></ion-input>
     </ion-item>
 
     <div id="direita">
@@ -18,7 +18,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-button color="success" class="login" expand="block" fill="outline" shape="round" (click)="geralCtrl.carregarTela('cadastro')">Salvar</ion-button>
+        <ion-button color="success" class="login" expand="block" fill="outline" shape="round" (click)="login()">Logar</ion-button>
       </ion-col>
 
       <ion-col>

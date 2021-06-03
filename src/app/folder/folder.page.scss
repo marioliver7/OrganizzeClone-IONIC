@@ -1,6 +1,5 @@
 .container {
   --background: rgb(0, 0, 0) url("../../assets/img/background5.jpg") no-repeat center center / cover;
-  filter: opacity(0.5);
 }
 
 ion-slide{
@@ -49,4 +48,8 @@ ion-button {
 ion-footer {
   padding: 0 10px;
   box-shadow: none;
+
+  &.footer-md::before {
+    background-image: none;
+  }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GeralService } from './service/geral.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,13 +7,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Fale Conosco', url: '/folder/Inbox', icon: 'mail' },
+    { title: 'Tutoriais', url: '/folder/Outbox', icon: 'paper-plane' },
+    { title: 'Redes Sociais', url: '/folder/Favorites', icon: 'heart' },
+    { title: 'Contatos', url: '/folder/Archived', icon: 'archive' },
+    { title: 'Perfil', url: '/cadastro', icon: 'person-circle' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor(public geralCTRL: GeralService) {
+    if(localStorage.getItem('user') == null || localStorage.getItem('user') == '') {
+      geralCTRL.carregarTela('folder/inbox');
+    } else {
+      geralCTRL.carregarTela('principal');
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('total');
+
+    this.geralCTRL.carregarTela('login');
+  }
 }
